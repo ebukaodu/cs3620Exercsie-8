@@ -27,6 +27,11 @@ class ItemController extends Controller
         return view('onlineShop.item', ['item' => $item]);
     }
 
+    public function getOrder( $id) {
+        $item = Item::where('id', '=', $id)->with('likes')->first();
+        return view('onlineShop.order', ['item' => $item]);
+    }
+
     public function getAdminCreate() {
         $tags = Tag::all();
         return view('admin.create',['tags' => $tags]);

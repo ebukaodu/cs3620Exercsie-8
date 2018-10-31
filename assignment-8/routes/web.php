@@ -22,6 +22,12 @@ Route::get('item/{id}', [
     'as' => 'onlineShop.item'
 ]);
 
+Route::get('order/{id}', [
+    'uses' => 'ItemController@getOrder',
+    'as' => 'onlineShop.order'
+    , 'middleware' => 'auth'
+]);
+
 Route::get('item/{id}/like', [
     'uses' => 'ItemController@getLikeItem',
     'as' => 'onlineShop.item.like'
@@ -31,7 +37,7 @@ Route::get('story', function () {
     return view('about.story');
 })->name('about.story');
 
-Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('', [
         'uses' => 'ItemController@getAdminIndex',
         'as' => 'admin.index'
@@ -42,7 +48,7 @@ Route::group(['prefix' => 'admin'], function() {
         'as' => 'admin.create'
     ]);
 
-    Route::item('create', [
+    Route::post('create', [
         'uses' => 'ItemController@itemAdminCreate',
         'as' => 'admin.create'
     ]);
@@ -57,7 +63,7 @@ Route::group(['prefix' => 'admin'], function() {
         'as' => 'admin.delete'
     ]);
 
-    Route::item('edit', [
+    Route::post('edit', [
         'uses' => 'ItemController@itemAdminUpdate',
         'as' => 'admin.update'
     ]);
@@ -65,7 +71,7 @@ Route::group(['prefix' => 'admin'], function() {
 });
 Auth::routes();
 
-Route::item('login', [
+Route::post('login', [
     'uses' => 'SigninController@signin',
     'as'   => 'auth.signin'
 ]);

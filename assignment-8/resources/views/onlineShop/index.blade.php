@@ -24,7 +24,8 @@
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="{{ route('onlineShop.item', ['id' => $item->id]) }}" >View</a>
+                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ route('onlineShop.item', ['id' => $item->id]) }}" >View</a></button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ route('onlineShop.order', ['id' => $item->id]) }}" > Order</a></button>
                             </div>
                             <small class="text-muted">{{ $item->price }}</small>
                         </div>

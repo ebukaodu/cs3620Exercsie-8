@@ -14,6 +14,9 @@
         </div>
     <div class="d-flex justify-content-between align-items-center">
         <small class="text-muted">{{ $item->price }}</small>
+        <p><button type="button" class="btn btn-big btn-outline-secondary"><small class="text-muted">
+                    <a href="{{ route('onlineShop.order', ['id' => $item->id]) }}" > Order</a></small>
+            </button></p>
     </div>
     </div>
 @endsection
