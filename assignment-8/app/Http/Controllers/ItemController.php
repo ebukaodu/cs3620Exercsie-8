@@ -55,7 +55,7 @@ class ItemController extends Controller
             return redirect()->back();
         }
         $item->likes()->delete();
-        $item>tags()->detach();
+        $item->tags()->detach();
         $item->delete();
         return redirect()->route('admin.index')->with('info', 'Item deleted!');
     }
@@ -86,6 +86,7 @@ class ItemController extends Controller
         ]);
 
         $item = Item::find($request->input('id'));
+
         if(Gate::denies('manipulate-item', $item)) {
             return redirect()->back();
         }
