@@ -17,6 +17,19 @@ class ItemController extends Controller
         return view('onlineShop.index', ['items' => $items]);
     }
 
+
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function index()
+    {
+        $comments = Comment::latest('created_at')->get();
+        return view('item', ['comments' => $comments]);
+    }
+
     public function getAdminIndex() {
         $items = Item::orderBy('name', 'asc')->get();
         return view('admin.index', ['items' => $items]);

@@ -25,7 +25,7 @@
 
     </section>
 
-    <section class="jumbotron text-center">
+    <section class=" text-center">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
@@ -39,10 +39,10 @@
                         @endif
                         <form id="comment-form" method="post" action="{{ route('comments.store') }}" >
                             {{ csrf_field() }}
-                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" >
+                            <input type="hidden" name="user_id" value="{{ Auth::user()}}">
                             <div class="row" style="padding: 10px;">
                                 <div class="form-group">
-                                    <textarea class="form-control" name="comment" placeholder="Write something from your heart..!"></textarea>
+                                    <textarea class="form-control" name="comment" placeholder="What do you think about the product?"></textarea>
                                 </div>
                             </div>
                             <div class="row" style="padding: 0 10px 0 10px;">
