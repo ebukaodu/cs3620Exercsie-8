@@ -14,6 +14,7 @@ class ItemTableSeeder extends Seeder
         //
         $item = new \App\Item([
             'name'   => 'TicWatch Pro Bluetooth Smart Watch',
+
             'detail' => 'Layered Display, NFC Payment, Google Assistant, Wear OS by Google (Formerly Android Wear),Compatible with iPhone and Android (Black)',
             'price' => '$252.45'
         ]);

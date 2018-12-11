@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('content')
+
     @if(Session::has('info'))
         <div class="row">
             <div class="col-md-12">
@@ -13,6 +14,8 @@
         </div>
     </div>
     <hr>
+    <section class="jumbotron text-left" style="font-size: small">
+        <div class="container">
     @foreach($items as $item)
         <div class="row">
             <div class="col-md-12">
@@ -22,5 +25,8 @@
             </div>
         </div>
     @endforeach
+        </div>
+        </section >
+
 
 @endsection

@@ -4,6 +4,11 @@
     text-align: center;
 }
 
+body {
+    background-image: url("../images/hd-wallpaper-ivy-leaves-.jpg");
+    background-color: #cccccc;
+}
+
 .post-title{
     color: #F4645F;
 }
@@ -11,6 +16,8 @@ div.footer {
     display: block;
     text-align: center;
     position: running(footer);
+    color: #2d995b;
+    background-color: #1d643b;
 }
 html, body {
     width: 100%;
@@ -25,6 +32,7 @@ html, body {
     padding-bottom: var(--jumbotron-padding-y);
     margin-bottom: 0;
     background-color: #fff;
+    font-size: 12%;
 }
 @media (min-width: 768px) {
     .jumbotron {
@@ -39,10 +47,12 @@ html, body {
 
 .jumbotron-heading {
     font-weight: 300;
+    font-size: 12%;
 }
 
 .jumbotron .container {
     max-width: 40rem;
+    font-size: 12%;
 }
 
 .footer {
@@ -50,10 +60,12 @@ html, body {
     left:0;
     bottom: 0;
     width: 100%;
+
 }
 
 footer p {
     margin-bottom: .25rem;
+    color: #2d995b;
 }
 
 .dropbtn {

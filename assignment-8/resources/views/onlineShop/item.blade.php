@@ -2,8 +2,11 @@
 
 
 @section('content')
+    <section class="jumbotron text-left">
+        <div class="container">
     <div class="card-body">
         <p class="card-text">{{ $item->name }}</p>
+        <!--<p class="card-img-top">{{ $item->pic }}</p>-->
         <div class="row">
             <div class="col-md-12">
                 <p>{{ count($item->likes) }} Likes |
@@ -19,4 +22,15 @@
             </button></p>
     </div>
     </div>
+
+    </section>
+
+    <section class="jumbotron text-center">
+        <div class="container">
+
+        </div>
+    </section>
 @endsection
+
+
+

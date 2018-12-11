@@ -6,6 +6,10 @@
         <div class="col-md-12">
             <form action="{{ route('admin.create') }}" method="post">
                 <div class="form-group">
+                    <label for="image">Name</label>
+                    <input type="file" class="form-control" id="pic" name="pic" accept="image/*">
+                </div>
+                <div class="form-group">
                     <label for="title">Name</label>
                     <input type="text" class="form-control" id="name" name="name">
                 </div>
