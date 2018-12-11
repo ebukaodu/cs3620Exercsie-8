@@ -75,3 +75,7 @@ Route::post('login', [
     'uses' => 'SigninController@signin',
     'as'   => 'auth.signin'
 ]);
+
+Route::resource('/comments','CommentsController');
+Route::resource('/replies','RepliesController');
+Route::post('/replies/ajaxDelete','RepliesController@ajaxDelete');

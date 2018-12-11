@@ -2,10 +2,11 @@
 
 @section('content')
     @include('design.errors')
-    <div class="row">
+    <div class="row" style="background-color: #383d41; color: #3f9ae5 ">
+        &nbsp;
         <div class="col-md-12">
             <form action="{{ route('admin.create') }}" method="post">
-                <div class="form-group">
+                <div >
                     <label for="image">Name</label>
                     <input type="file" class="form-control" id="pic" name="pic" accept="image/*">
                 </div>
@@ -33,5 +34,6 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
+        &nbsp;
     </div>
 @endsection
