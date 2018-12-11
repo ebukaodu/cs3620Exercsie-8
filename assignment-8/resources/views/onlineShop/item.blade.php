@@ -66,11 +66,11 @@
 
                         @foreach($comments as $comment)
                             <div class="well">
-                                <i><b> {{ $comment->name }} </b></i>&nbsp;&nbsp;
-                                <span> {{ $comment->comment }} </span>
+                                <i><b> {{ $item ->$comment.name }} </b></i>&nbsp;&nbsp;
+                                <span> {{ $item->$comment.comment }} </span>
                                 <div style="margin-left:10px;">
-                                    <a style="cursor: pointer;" cid="{{ $comment->id }}" name_a="{{ Auth::user()->name }}" token="{{ csrf_token() }}" class="reply">Reply</a>&nbsp;
-                                    <a style="cursor: pointer;"  class="delete-comment" token="{{ csrf_token() }}" comment-did="{{ $comment->id }}" >Delete</a>
+                                    <a style="cursor: pointer;" cid="{{ $item->$comment->id }}" name_a="{{ Auth::user()->name }}" token="{{ csrf_token() }}" class="reply">Reply</a>&nbsp;
+                                    <a style="cursor: pointer;"  class="delete-comment" token="{{ csrf_token() }}" comment-did="{{ $item->$comment->id }}" >Delete</a>
                                     <div class="reply-form">
 
                                         <!-- Dynamic Reply form -->

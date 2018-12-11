@@ -36,4 +36,8 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token) {
         $this->notify(new CustomPasswordReset($token));
     }
+
+    public function comments() {
+        return $this->hasMany('App\Comment');
+    }
 }

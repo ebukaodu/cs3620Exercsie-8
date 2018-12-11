@@ -23,7 +23,7 @@ class ItemController extends Controller
     }
 
     public function getItem( $id) {
-        $item = Item::where('id', '=', $id)->with('likes')->first();
+        $item = Item::where('id', '=', $id)->with('likes')->with('comments')->first();
         return view('onlineShop.item', ['item' => $item]);
     }
 
