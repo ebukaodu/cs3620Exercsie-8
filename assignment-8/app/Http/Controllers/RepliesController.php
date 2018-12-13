@@ -33,22 +33,22 @@ class RepliesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        if (Auth::check()) {
-            Reply::create([
-                'comment_id' => $request->input('comment_id'),
-                'name' => $request->input('name'),
-                'reply' => $request->input('reply'),
-                'user_id' => Auth::user()->id
-            ]);
-
-            return redirect()->route('onlineShop.item')->with('success','Reply added');
-        }
-
-        return back()->withInput()->with('error','Something wronmg');
-        
-    }
+//    public function store(Request $request)
+//    {
+//        if (Auth::check()) {
+//            Reply::create([
+//                'comment_id' => $request->input('comment_id'),
+//                'name' => $request->input('name'),
+//                'reply' => $request->input('reply'),
+//                'user_id' => Auth::user()->id
+//            ]);
+//
+//            return redirect()->route('onlineShop.item')->with('success','Reply added');
+//        }
+//
+//        return back()->withInput()->with('error','Something wronmg');
+//
+//    }
 
     /**
      * Display the specified resource.
@@ -90,20 +90,20 @@ class RepliesController extends Controller
      * @param  \App\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Reply $reply)
-    {
-        if (Auth::check()) {
-            $reply = Reply::where(['id'=>$reply->id,'user_id'=>Auth::user()->id]);
-            if ($reply->delete()) {
-                return 1;
-            }else{
-                return 2;
-            }
-        }else{
-
-        }
-        return 3;
-    }
+//    public function destroy(Reply $reply)
+//    {
+//        if (Auth::check()) {
+//            $reply = Reply::where(['id'=>$reply->id,'user_id'=>Auth::user()->id]);
+//            if ($reply->delete()) {
+//                return 1;
+//            }else{
+//                return 2;
+//            }
+//        }else{
+//
+//        }
+//        return 3;
+//    }
 
 
 

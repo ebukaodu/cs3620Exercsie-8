@@ -1,4 +1,4 @@
-<footer class="footer text-muted">
+<footer class="card-footer bg-transparent border-success">
     <div class="container">
         <p class="float-right">
             <a href="#">Back to top</a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Item;
 use App\Like;
 use App\Tag;
+use App\Comment;
 use Auth;
 use Gate;
 use Illuminate\Http\Request;
@@ -51,6 +52,74 @@ class ItemController extends Controller
         $item ->likes()->save($like);
         return redirect()->back();
     }
+
+    public function postComments( Request $request) {
+        $this->validate($request, [
+            'comment' => 'required|min:1'
+        ]);
+        if (Auth::check()) {
+            $comment = new Comment([
+                'comment' => $request->input('comment'),
+                'name' => $request->input('name'),
+                'user_id' => $request->input('user_id'),
+                'item_id' => $request->input('item_id'),
+            ]);
+
+            $comment->save();
+            return redirect()->back();
+        }
+        else {
+            return back()->withInput()->with('error', 'Something wrong');
+        }
+    }
+
+    public function postReplies(Request $request)
+    {
+        $this->validate($request, [
+            'reply' => 'required|min:1'
+        ]);
+        if (Auth::check()) {
+            $reply = new Reply([
+                'comment_id' => $request->input('comment_id'),
+                'name' => $request->input('name'),
+                'reply' => $request->input('reply'),
+                'user_id' => Auth::user()->id
+            ]);
+            $reply->save();
+            return redirect()->back();
+        }
+
+        return back()->withInput()->with('error','Something wronmg');
+
+    }
+
+    public function deleteComment($id) {
+        if (Auth::check()) {
+            $comment = Comment::find($id);
+            $comment->delete();
+            return redirect()->back();
+        }
+    }
+
+    public function deleteReply(Item $reply)
+    {
+        if (Auth::check()) {
+            $reply = Reply::where(['id'=>$reply->id,'user_id'=>Auth::user()->id]);
+            if ($reply->delete()) {
+                return 1;
+            }else{
+                return 2;
+            }
+        }else{
+
+        }
+        return 3;
+    }
+
+
+
+
+
     public function getAdminEdit($id) {
         $item = Item::find($id);
         $tags = Tag::all();
