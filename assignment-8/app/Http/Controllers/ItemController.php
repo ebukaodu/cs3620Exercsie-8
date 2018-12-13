@@ -6,6 +6,7 @@ use App\Item;
 use App\Like;
 use App\Tag;
 use App\Comment;
+use App\Reply;
 use Auth;
 use Gate;
 use Illuminate\Http\Request;
@@ -75,9 +76,6 @@ class ItemController extends Controller
 
     public function postReplies(Request $request)
     {
-        $this->validate($request, [
-            'reply' => 'required|min:1'
-        ]);
         if (Auth::check()) {
             $reply = new Reply([
                 'comment_id' => $request->input('comment_id'),

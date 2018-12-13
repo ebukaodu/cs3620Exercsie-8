@@ -43,6 +43,7 @@
                             {{ csrf_field() }}
                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" >
                             <input type="hidden" name="item_id" value="{{ $item->id }}" >
+                            {{--<input type="hidden" name="comment_id" value="{{ $comment->id }}" >--}}
                             <input type="hidden" name="name" value="{{ Auth::user()->name}}" >
                             <div class="row" style="padding: 10px;">
                                 <div class="form-group col-12">

@@ -38,7 +38,7 @@ Route::post('item/{id}/comments', [
     'as' => 'onlineShop.comment'
 ]);
 
-Route::post('item/{id}/comment/{id}replies', [
+Route::post('/comment/{id}/replies', [
     'uses' => 'itemController@postReplies',
     'as' => 'onlineShop.reply'
 ]);
