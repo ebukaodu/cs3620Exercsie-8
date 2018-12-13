@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <section class=" text-left">
+    <section class="container text-left" style="background-color: #adb5bd">
         <div class="container">
     <div class="card-body">
         <p class="card-text">{{ $item->name }}</p>
@@ -18,13 +18,15 @@
     <div class="d-flex justify-content-between align-items-center">
         <small class="text-muted">{{ $item->price }}</small>
         <p><button type="button" class="btn btn-big btn-outline-secondary"><small class="text-muted">
-                    <a href="{{ route('onlineShop.order', ['id' => $item->id]) }}" > Order</a></small>
+                    <a href="{{ route('onlineShop.order', ['id' => $item->id]) }}" > Order  </a></small>
             </button></p>
     </div>
     </div>
 
     </section>
 
+     &nbsp;
+    &nbsp;
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2" >
@@ -57,26 +59,63 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Comments</div>
 
-        <h3>Comments</h3>
-        @if (Auth::check())
-            @include('includes.errors')
-            {{ Form::open(['route' => ['comments.store'], 'method' => 'POST']) }}
-            <p>{{ Form::textarea('body', old('body')) }}</p>
-            {{ Form::hidden('item_id', $item->id) }}
-            <p>{{ Form::submit('Send') }}</p>
-            {{ Form::close() }}
-        @endif
-        @forelse ($item->comments as $comment)
-            <p>{{ $comment->user->name }} {{$comment->created_at}}</p>
-            <p>{{ $comment->body }}</p>
-            <hr>
-        @empty
-            <p>This post has no comments</p>
-        @endforelse
+                    <div class="panel-body comment-container" >
 
+                        @foreach($item->comments as $comment)
+                            <div class="well">
+                                <i><b> {{ $comment->name }} </b></i>&nbsp;&nbsp;
+                                <span> {{ $comment->comment }} </span>
+                                <div style="margin-left:10px;">
+                                    <a style="cursor: pointer;" cid="{{ $comment->id }}" name_a="{{ Auth::user()->name }}" token="{{ csrf_token() }}" class="reply">Reply</a>&nbsp;
+                                    <a style="cursor: pointer;"  class="delete-comment" token="{{ csrf_token() }}" comment-did="{{ $comment->id }}" >Delete</a>
+                                    <div class="reply-form">
+
+                                        <!-- Dynamic Reply form -->
+
+                                    </div>
+                                    @foreach($item->comment->replies as $rep)
+                                        @if($comment->id === $rep->comment_id)
+                                            <div class="well">
+                                                <i><b> {{ $rep->name }} </b></i>&nbsp;&nbsp;
+                                                <span> {{ $rep->reply }} </span>
+                                                <div style="margin-left:10px;">
+                                                    <a rname="{{ Auth::user()->name }}" rid="{{ $comment->id }}" style="cursor: pointer;" class="reply-to-reply" token="{{ csrf_token() }}">Reply</a>&nbsp;<a did="{{ $rep->id }}" class="delete-reply" token="{{ csrf_token() }}" >Delete</a>
+                                                </div>
+                                                <div class="reply-to-reply-form">
+
+                                                    <!-- Dynamic Reply form -->
+
+                                                </div>
+
+                                            </div>
+                                        @endif
+                                    @endforeach
+
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+    <div class="card mb-4 shadow-sm text-left" style="background-color: #adb5bd">
+        <div class="card-body">
         <span>{{$item->comments->count()}} {{ str_plural('comment', $item->comments->count()) }}</span>
-
+        </div>
+    </div>
         @endsection
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
