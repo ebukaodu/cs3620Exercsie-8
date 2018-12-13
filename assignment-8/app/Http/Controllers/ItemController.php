@@ -21,7 +21,8 @@ class ItemController extends Controller
     public function index()
     {
         $comments = Comment::latest('created_at')->get();
-        return view('item', ['comments' => $comments]);
+        //$item = Item::where('id', '=', $id)->with('likes')->with('comments')->first();
+        return view('onlineShop.item', ['comments' => $comments]);
     }
 
     public function getAdminIndex() {

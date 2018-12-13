@@ -33,6 +33,11 @@ Route::get('item/{id}/like', [
     'as' => 'onlineShop.item.like'
 ]);
 
+Route::get('item/{id}/comments', [
+    'uses' => 'ItemController@index',
+    'as' => 'onlineShop.item'
+]);
+
 Route::get('story', function () {
     return view('about.story');
 })->name('about.story');
@@ -79,3 +84,7 @@ Route::post('login', [
 Route::resource('/comments','CommentsController');
 Route::resource('/replies','RepliesController');
 Route::post('/replies/ajaxDelete','RepliesController@ajaxDelete');
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('/item/{id}/comment', 'CommentController@store');
+});

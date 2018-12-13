@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2" >
                 <div class="panel panel-default">
-                    <div class="panel-heading">Response</div>
+                    <div class="panel-heading">Respond</div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -84,7 +84,8 @@
                                                 <i><b> {{ $rep->name }} </b></i>&nbsp;&nbsp;
                                                 <span> {{ $rep->reply }} </span>
                                                 <div style="margin-left:10px;">
-                                                    <a rname="{{ Auth::user()->name }}" rid="{{ $comment->id }}" style="cursor: pointer;" class="reply-to-reply" token="{{ csrf_token() }}">Reply</a>&nbsp;<a did="{{ $rep->id }}" class="delete-reply" token="{{ csrf_token() }}" >Delete</a>
+                                                    <a rname="{{ Auth::user()->name }}" rid="{{ $comment->id }}" style="cursor: pointer;" class="reply-to-reply" token="{{ csrf_token() }}">Reply</a>&nbsp;
+                                                    <a did="{{ $rep->id }}" class="delete-reply" token="{{ csrf_token() }}" >Delete</a>
                                                 </div>
                                                 <div class="reply-to-reply-form">
 
@@ -116,7 +117,7 @@
         <span>{{$item->comments->count()}} {{ str_plural('comment', $item->comments->count()) }}</span>
         </div>
     </div>
-        @endsection
+@endsection
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="{{ asset('/js/main.js') }}"></script>
