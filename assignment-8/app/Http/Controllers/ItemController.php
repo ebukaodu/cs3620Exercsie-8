@@ -18,12 +18,6 @@ class ItemController extends Controller
     }
 
 
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
         $comments = Comment::latest('created_at')->get();

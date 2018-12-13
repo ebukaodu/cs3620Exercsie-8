@@ -4,11 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Reply;
+use App\Item;
+use Illuminate\Database\Eloquent\Model;
+use App\Presenters\DatePresenter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CommentRequest;
 
 class CommentsController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -38,13 +46,15 @@ class CommentsController extends Controller
     public function store(Request $request)
     {
         if (Auth::check()) {
+            $item = Item::findOrFail($request->item_id);
             Comment::create([
                 'name' => Auth::user()->name,
                 'comment' => $request->input('comment'),
-                'user_id' => Auth::user()->id
+                'user_id' => Auth::user()->id,
+                'item_id' => $item->id
             ]);
 
-            return redirect()->route('home')->with('success','Comment Added successfully..!');
+            return redirect()->route('onlineShop.item')->with('success','Comment Added successfully..!');
         }else{
             return back()->withInput()->with('error','Something wrong');
         }

@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <section class="jumbotron text-left">
+    <section class=" text-left">
         <div class="container">
     <div class="card-body">
         <p class="card-text">{{ $item->name }}</p>
@@ -25,9 +25,9 @@
 
     </section>
 
-    <section class=" text-center">
+    <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-8 col-md-offset-2" >
                 <div class="panel panel-default">
                     <div class="panel-heading">Response</div>
 
@@ -39,10 +39,10 @@
                         @endif
                         <form id="comment-form" method="post" action="{{ route('comments.store') }}" >
                             {{ csrf_field() }}
-                            <input type="hidden" name="user_id" value="{{ Auth::user()}}">
+                            <input type="hidden" name="user_id" value="{{ Auth::user()}}" >
                             <div class="row" style="padding: 10px;">
                                 <div class="form-group">
-                                    <textarea class="form-control" name="comment" placeholder="What do you think about the product?"></textarea>
+                                    <textarea class="form-control" name="comment" placeholder="Write a customer review..!"></textarea>
                                 </div>
                             </div>
                             <div class="row" style="padding: 0 10px 0 10px;">
@@ -57,53 +57,29 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Comments</div>
 
-                    <div class="panel-body comment-container" >
+        <h3>Comments</h3>
+        @if (Auth::check())
+            @include('includes.errors')
+            {{ Form::open(['route' => ['comments.store'], 'method' => 'POST']) }}
+            <p>{{ Form::textarea('body', old('body')) }}</p>
+            {{ Form::hidden('item_id', $item->id) }}
+            <p>{{ Form::submit('Send') }}</p>
+            {{ Form::close() }}
+        @endif
+        @forelse ($item->comments as $comment)
+            <p>{{ $comment->user->name }} {{$comment->created_at}}</p>
+            <p>{{ $comment->body }}</p>
+            <hr>
+        @empty
+            <p>This post has no comments</p>
+        @endforelse
 
-                        @foreach($comments as $comment)
-                            <div class="well">
-                                <i><b> {{ $item ->$comment.name }} </b></i>&nbsp;&nbsp;
-                                <span> {{ $item->$comment.comment }} </span>
-                                <div style="margin-left:10px;">
-                                    <a style="cursor: pointer;" cid="{{ $item->$comment->id }}" name_a="{{ Auth::user()->name }}" token="{{ csrf_token() }}" class="reply">Reply</a>&nbsp;
-                                    <a style="cursor: pointer;"  class="delete-comment" token="{{ csrf_token() }}" comment-did="{{ $item->$comment->id }}" >Delete</a>
-                                    <div class="reply-form">
+        <span>{{$item->comments->count()}} {{ str_plural('comment', $item->comments->count()) }}</span>
 
-                                        <!-- Dynamic Reply form -->
+        @endsection
 
-                                    </div>
-                                    @foreach($comment->replies as $rep)
-                                        @if($comment->id === $rep->comment_id)
-                                            <div class="well">
-                                                <i><b> {{ $rep->name }} </b></i>&nbsp;&nbsp;
-                                                <span> {{ $rep->reply }} </span>
-                                                <div style="margin-left:10px;">
-                                                    <a rname="{{ Auth::user()->name }}" rid="{{ $comment->id }}" style="cursor: pointer;" class="reply-to-reply" token="{{ csrf_token() }}">Reply</a>&nbsp;
-                                                    <a did="{{ $rep->id }}" class="delete-reply" token="{{ csrf_token() }}" >Delete</a>
-                                                </div>
-                                                <div class="reply-to-reply-form">
-
-                                                    <!-- Dynamic Reply form -->
-
-                                                </div>
-
-                                            </div>
-                                        @endif
-                                    @endforeach
-
-                                </div>
-                            </div>
-                        @endforeach
-
-                    </div>
-                </div>
-            </div>
-    </section>
-@endsection
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="{{ asset('/js/main.js') }}"></script>
 
 

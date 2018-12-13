@@ -29,6 +29,6 @@ protected $fillable = ['name', 'detail', 'price'];
     }
 
     public function comments() {
-        return $this->belongsTo('App\User');
+        return $this->hasMany('App\Comment');
     }
 }

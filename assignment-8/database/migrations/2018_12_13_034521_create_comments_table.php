@@ -17,7 +17,8 @@ class CreateCommentsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('comment');
-            $table->integer('user_id');
+            $table->integer('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->timestamps();
         });
     }
